@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+require "rake/extensiontask"
+require "rb_sys/extensiontask"
+
+GEMSPEC = Gem::Specification.load("lightspark_crypto.gemspec")
+
+RbSys::ExtensionTask.new("lightspark_crypto", GEMSPEC) do |ext|
+  ext.lib_dir = "lib/lightspark_crypto"
+end
+
+task default: :compile
