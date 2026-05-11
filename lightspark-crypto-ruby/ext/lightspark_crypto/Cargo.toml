@@ -10,5 +10,5 @@ name = "lightspark_crypto"
 crate-type = ["cdylib"]
 
 [dependencies]
-magnus = { path = "../../../../magnus" }
+magnus = "0.8"
 lightspark-crypto = { path = "../../../" }
