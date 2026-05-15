@@ -35,3 +35,10 @@ lightspark-crypto-python/*.egg-info/
 *.so
 lightspark-crypto-python/src/lightspark_crypto/lightspark_crypto.py
 __pycache__
+
+# Ruby
+lightspark-crypto-ruby/tmp/
+lightspark-crypto-ruby/pkg/
+lightspark-crypto-ruby/lib/**/*.bundle
+*.gem
+.bundle/

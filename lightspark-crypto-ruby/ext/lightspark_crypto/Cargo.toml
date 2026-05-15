@@ -1,0 +1,14 @@
+[package]
+name = "lightspark_crypto"
+version = "0.1.0"
+edition = "2021"
+authors = ["Lightspark Group, Inc."]
+license = "Apache-2.0"
+
+[lib]
+name = "lightspark_crypto"
+crate-type = ["cdylib"]
+
+[dependencies]
+magnus = "0.8"
+lightspark-crypto = { path = "../../../" }
