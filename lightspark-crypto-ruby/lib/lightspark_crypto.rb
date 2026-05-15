@@ -11,64 +11,37 @@ module LightsparkCrypto
     REGTEST = 3
   end
 
+  # The native extension registers each function under an underscore-prefixed
+  # name (e.g. `_sign_ecdsa`). Aliases below expose the unprefixed names.
+  # Methods that need optional/default arguments stay as wrappers because magnus
+  # singleton methods have fixed arity.
   class << self
-    def get_mnemonic_seed_phrase(entropy) = _get_mnemonic_seed_phrase(entropy)
-
-    def mnemonic_to_seed(mnemonic) = _mnemonic_to_seed(mnemonic)
-
-    def derive_public_key(seed_bytes, network, derivation_path) =
-      _derive_public_key(seed_bytes, network, derivation_path)
-
-    def derive_private_key(seed_bytes, network, derivation_path) =
-      _derive_private_key(seed_bytes, network, derivation_path)
-
-    def ecdh(seed_bytes, network, other_pub_key) =
-      _ecdh(seed_bytes, network, other_pub_key)
+    alias get_mnemonic_seed_phrase _get_mnemonic_seed_phrase
+    alias mnemonic_to_seed _mnemonic_to_seed
+    alias derive_public_key _derive_public_key
+    alias derive_private_key _derive_private_key
+    alias ecdh _ecdh
+    alias sign_invoice _sign_invoice
+    alias sign_invoice_hash _sign_invoice_hash
+    alias get_per_commitment_point _get_per_commitment_point
+    alias release_per_commitment_secret _release_per_commitment_secret
+    alias generate_preimage_nonce _generate_preimage_nonce
+    alias generate_preimage _generate_preimage
+    alias generate_preimage_hash _generate_preimage_hash
+    alias sign_ecdsa _sign_ecdsa
+    alias verify_ecdsa _verify_ecdsa
+    alias encrypt_ecies _encrypt_ecies
+    alias decrypt_ecies _decrypt_ecies
+    alias generate_multisig_address _generate_multisig_address
+    alias generate_keypair _generate_keypair
+    alias sign_transactions _sign_transactions
 
     def derive_key_and_sign(seed_bytes, network, message, derivation_path, is_raw, add_tweak = nil, mul_tweak = nil)
       _derive_key_and_sign(seed_bytes, network, message, derivation_path, is_raw, add_tweak, mul_tweak)
     end
 
-    def sign_invoice(seed_bytes, network, unsigned_invoice) =
-      _sign_invoice(seed_bytes, network, unsigned_invoice)
-
-    def sign_invoice_hash(seed_bytes, network, unsigned_invoice_bytes) =
-      _sign_invoice_hash(seed_bytes, network, unsigned_invoice_bytes)
-
-    def get_per_commitment_point(seed_bytes, network, derivation_path, per_commitment_point_idx)
-      _get_per_commitment_point(seed_bytes, network, derivation_path, per_commitment_point_idx)
-    end
-
-    def release_per_commitment_secret(seed_bytes, network, derivation_path, per_commitment_point_idx)
-      _release_per_commitment_secret(seed_bytes, network, derivation_path, per_commitment_point_idx)
-    end
-
-    def generate_preimage_nonce(seed_bytes) = _generate_preimage_nonce(seed_bytes)
-
-    def generate_preimage(seed_bytes, nonce) = _generate_preimage(seed_bytes, nonce)
-
-    def generate_preimage_hash(seed_bytes, nonce) = _generate_preimage_hash(seed_bytes, nonce)
-
-    def sign_ecdsa(msg, private_key_bytes) = _sign_ecdsa(msg, private_key_bytes)
-
-    def verify_ecdsa(msg, signature_bytes, public_key_bytes) =
-      _verify_ecdsa(msg, signature_bytes, public_key_bytes)
-
-    def encrypt_ecies(msg, public_key_bytes) = _encrypt_ecies(msg, public_key_bytes)
-
-    def decrypt_ecies(cipher_text, private_key_bytes) =
-      _decrypt_ecies(cipher_text, private_key_bytes)
-
-    def generate_multisig_address(network, pk1, pk2) =
-      _generate_multisig_address(network, pk1, pk2)
-
     def derive_and_tweak_pubkey(pubkey, derivation_path, add_tweak = nil, mul_tweak = nil)
       _derive_and_tweak_pubkey(pubkey, derivation_path, add_tweak, mul_tweak)
     end
-
-    def generate_keypair = _generate_keypair
-
-    def sign_transactions(master_seed, data, network) =
-      _sign_transactions(master_seed, data, network)
   end
 end
